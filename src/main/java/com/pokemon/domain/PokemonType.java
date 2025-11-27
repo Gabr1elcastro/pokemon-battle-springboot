@@ -13,4 +13,8 @@ public enum PokemonType {
         FOGO.vantagens = List.of(GRAMA);
         AGUA.vantagens = List.of(FOGO);
     }
+
+    public List<PokemonType> getVantagens() {
+        return vantagens;
+    }
 }

@@ -1,38 +1,45 @@
 package com.pokemon.service;
 
 import com.pokemon.domain.Pokemon;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Scanner;
 
+@Service
 public class ChoosePokemonService {
 
-    public List<Pokemon> choose(List<Pokemon> pokemon, Scanner leitor) {
-        Pokemon lutador1 = null;
-        Pokemon lutador2 = null;
-
-        for (int i = 0; i < pokemon.size(); i++) {
-            System.out.println(pokemon.get(i).getName());
-        }
+    public List<Pokemon> choose(List<Pokemon> pokemonList, Scanner scanner) {
+        printPokemonList(pokemonList);
 
         System.out.println("---------Digite o nome do primeiro Pokemon---------");
-
-        String escolha1 = leitor.nextLine();
-        for (int i = 0; i < pokemon.size(); i++) {
-            if (pokemon.get(i).getName().equals(escolha1)) {
-                lutador1 = pokemon.get(i);
-            }
-
-        }
+        Pokemon fighter1 = choosePokemon(scanner, pokemonList);
 
         System.out.println("---------Digite o nome do segundo Pokemon----------");
+        Pokemon fighter2 = choosePokemon(scanner, pokemonList);
 
-        String escolha2 = leitor.nextLine();
-        for (int i = 0; i < pokemon.size(); i++) {
-            if (pokemon.get(i).getName().equals(escolha2)) {
-                lutador2 = pokemon.get(i);
-            }
+        return List.of(fighter1, fighter2);
+    }
+
+    private static void printPokemonList(List<Pokemon> pokemonList) {
+        for (int i = 0; i < pokemonList.size(); i++) {
+            System.out.println(pokemonList.get(i).getName());
         }
-        return List.of(lutador1, lutador2);
+    }
+
+    private Pokemon choosePokemon(Scanner scanner, List<Pokemon> pokemonList) {
+        while (true) {
+            String choosedPokemon = scanner.nextLine();
+
+            for (int i = 0; i < pokemonList.size(); i++) {
+                Pokemon currentPokemon = pokemonList.get(i);
+
+                if (currentPokemon.getName().equalsIgnoreCase(choosedPokemon)) {
+                    return currentPokemon;
+                }
+            }
+
+            System.out.println("Incorrect name! Please re-enter the Pokemon's name:");
+        }
     }
 }

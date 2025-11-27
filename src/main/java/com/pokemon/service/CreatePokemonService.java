@@ -2,9 +2,11 @@ package com.pokemon.service;
 
 import com.pokemon.domain.Pokemon;
 import com.pokemon.domain.PokemonType;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CreatePokemonService {
 
     public List<Pokemon> create(){
